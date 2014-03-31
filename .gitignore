@@ -1,0 +1,4 @@
+*.class
+libraries/*
+modes/*
+tools/*
