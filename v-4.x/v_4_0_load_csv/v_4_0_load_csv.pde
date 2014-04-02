@@ -1,45 +1,91 @@
 import controlP5.*;
 //import edu.uic.ketai.inputService.*;
 //import edu.uic.ketai.*;  //No library found for edu.uic.ketai
-                        //Libraries must be installed in a folder named 'libraries' inside the 'sketchbook' folder.
+//Libraries must be installed in a folder named 'libraries' inside the 'sketchbook' folder.
 
 PGraphics pg;
 
 Table table;
+//TableRow[] rows;
+//ArrayList<TableRow> rows;
+Iterable<TableRow> rows;
+
+int counter = 0;
+
+String msg;
+
+//TableRow row;
 
 void setup() {
+
+  size(400, 800, P3D);
+
+  //REF orientation(PORTRAIT);
+  orientation(PORTRAIT);
+
+  //    table = loadTable("mammals.csv");
+  table = loadTable("Lang_backup.csv");
   
-    size(400, 800, P3D);
+  rows = table.rows();
 
-    //REF orientation(PORTRAIT);
-    orientation(PORTRAIT);
+  for(TableRow row : rows) {
+    
+    if(counter == 4) {
+        
+        msg = row.getString(1);  
+        
+        break;
+      
+    } else {
+      
+        counter += 1;
+    }
 
-    table = loadTable("mammals.csv");
 
+  }//for(TableRow row : rows)
+  
+//  row = rows.get(0);  //=> "doesn not exist"
+
+  
 }//void setup()  
 
 void _draw_v_4_0() {
- 
-   background(0);
-   translate(width/2, height/2);
-   rotateY(frameCount*PI/60);
-   translate(-50, -50);
-   fill(100, 0, 0);
-   box(100, 100, 100);
-//   translate(50, -50);
-//   fill(255, 255, 0);
-//   box(100, 100, 100);
-//   translate(-50, 50);
-//   fill(0, 0, 255);
-//   box(100, 100, 100);
-//   translate(50, 50);
-//   fill(0, 255, 0);
-//   box(100, 100, 100);
- 
+
+//  background(0);
+//  translate(width/2, height/2);
+//  rotateY(frameCount*PI/60);
+//  translate(-50, -50);
+//  fill(100, 0, 0);
+//  box(100, 100, 100);
+  
+  background(0);
+  
+  // text
+  textSize(32);
+  
+  fill(100, 0, 0);
+  
+  text(msg, 200, 600);
+  
+//  background(0);
+  translate(width/2, height/2);
+  rotateY(frameCount*PI/60);
+  translate(-50, -50);
+  box(100, 100, 100);
+  
+  //   translate(50, -50);
+  //   fill(255, 255, 0);
+  //   box(100, 100, 100);
+  //   translate(-50, 50);
+  //   fill(0, 0, 255);
+  //   box(100, 100, 100);
+  //   translate(50, 50);
+  //   fill(0, 255, 0);
+  //   box(100, 100, 100);
 }//void _draw_v_2_2_1()
 
 void draw() {
-      _draw_v_4_0();
+  _draw_v_4_0();
 }//void draw()
 
 //v-2.1
@@ -76,5 +122,4 @@ void draw() {
 
 //v-1.0
 //ellipse(50, 50, 80, 80);
-
 
