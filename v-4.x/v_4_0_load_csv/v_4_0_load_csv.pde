@@ -1,4 +1,9 @@
 import controlP5.*;
+
+import ketai.data.*;
+import java.lang.management.*;
+import java.text.SimpleDateFormat;
+
 //import edu.uic.ketai.inputService.*;
 //import edu.uic.ketai.*;  //No library found for edu.uic.ketai
 //Libraries must be installed in a folder named 'libraries' inside the 'sketchbook' folder.
@@ -11,8 +16,14 @@ Table table;
 Iterable<TableRow> rows;
 
 int counter = 0;
+int len;
+int divider = 10;
 
 String msg;
+ArrayList<String> msgs = new ArrayList<String>();
+
+long startTimeMs;
+SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
 //TableRow row;
 
@@ -30,11 +41,14 @@ void setup() {
 
   for(TableRow row : rows) {
     
-    if(counter == 4) {
+//    if(counter == 4) {
+    if(counter >= 4) {
         
-        msg = row.getString(1);  
+//        msg = row.getString(1);
+//          msgs.append(row.getString(1));
+          msgs.add(row.getString(1));
         
-        break;
+//        break;
       
     } else {
       
@@ -44,8 +58,20 @@ void setup() {
 
   }//for(TableRow row : rows)
   
+  counter = 0;
+
+//  len = msgs.size();
+
+//  len = msgs.size() * 5;
+  len = msgs.size() * divider;
+  
 //  row = rows.get(0);  //=> "doesn not exist"
 
+  println("----------------");
+  
+//  long startTimeMs = System.currentTimeMillis( );
+  
+  println("time => " + String.valueOf(startTimeMs));
   
 }//void setup()  
 
@@ -64,13 +90,37 @@ void _draw_v_4_0() {
   textSize(32);
   
   fill(100, 0, 0);
-  
-  text(msg, 200, 600);
+
+  if(counter < len - 2) {
+    
+//      msg = msgs.get(counter);  
+//      msg = msgs.get(counter / 5);
+      msg = msgs.get(counter / divider);
+      text(msg, 200, 600);
+      
+      counter += 1;
+      
+  } else {
+    
+//      msg = msgs.get(counter);
+//      msg = msgs.get(counter / 5);
+      msg = msgs.get(counter / divider);  
+      text(msg, 200, 600);
+      counter = 0;
+  }
+      
+  // Show time
+  textSize(20);
+  startTimeMs = System.currentTimeMillis( );
+  text(
+      sdf1.format(startTimeMs),
+      100, 100);
   
 //  background(0);
   translate(width/2, height/2);
   rotateY(frameCount*PI/60);
-  translate(-50, -50);
+//  rotateY(frameCount*PI/180);
+//  translate(-50, -50);
   box(100, 100, 100);
   
   //   translate(50, -50);
